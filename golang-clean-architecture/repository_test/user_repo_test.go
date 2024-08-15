@@ -1,3 +1,5 @@
+// +build db
+
 package repository_test
 
 import (
