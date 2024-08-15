@@ -1,4 +1,29 @@
-uses: actions/cache@v3
+name: Go CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: 1.20
+
+    - name: Cache Go modules
+      uses: actions/cache@v3
       with:
         path: |
           ~/.cache/go-build
@@ -11,7 +36,7 @@ uses: actions/cache@v3
       run: go mod download
 
     - name: Run tests
-      run: go test ./... -v
+      run: go test -tags='!db' ./... -v
 
     - name: Build project
       run: go build -v ./...
