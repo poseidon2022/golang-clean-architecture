@@ -50,4 +50,10 @@ jobs:
         MONGO_URI: "mongodb://localhost:27017/testdb"      
       run: go test ./... -v    
 
-    - name: Bui
+    - name: Build project      
+      run: go build -v ./...    
+
+    - name: Run static analysis      
+      run: |        
+        go fmt ./...        
+        go vet ./...
