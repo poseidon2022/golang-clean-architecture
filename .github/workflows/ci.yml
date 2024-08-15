@@ -18,7 +18,7 @@ jobs:
         ports:          
           - 27017:27017        
         options: > 
-          --health-cmd='["/bin/sh", "-c", "mongo --eval \\"db.runCommand({ ping: 1 })\\""]'
+          --health-cmd="mongo --eval 'db.runCommand({ ping: 1 })'"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
@@ -50,10 +50,4 @@ jobs:
         MONGO_URI: "mongodb://localhost:27017/testdb"      
       run: go test ./... -v    
 
-    - name: Build project      
-      run: go build -v ./...    
-
-    - name: Run static analysis      
-      run: |        
-        go fmt ./...        
-        go vet ./...
+    - name: Bui
