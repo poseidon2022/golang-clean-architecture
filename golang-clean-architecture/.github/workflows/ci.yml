@@ -27,14 +27,18 @@ jobs:
 
     - name: Install dependencies
       run: go mod tidy
+      working-directory: ./
 
     - name: Run tests
       run: go test -tags='!db' ./... -v
+      working-directory: ./
 
     - name: Build project
       run: go build -v ./...
+      working-directory: ./
 
     - name: Run static analysis
       run: |
         go fmt ./...
         go vet ./...
+      working-directory: ./
